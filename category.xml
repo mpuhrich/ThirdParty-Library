@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+    <category-def name="all" label="Maven Dependencies"/>
+    <iu>
+        <category name="all"/>
+        <query>
+            <expression type="match">providedCapabilities.exists(p | p.namespace == 'org.eclipse.update.feature')</expression>
+        </query>
+    </iu>
+</site>
