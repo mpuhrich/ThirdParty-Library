@@ -16,6 +16,7 @@
 		<org.eclipse.ecf_ch.ethz.iks.r_osgi.remote.version>1.0.9</org.eclipse.ecf_ch.ethz.iks.r_osgi.remote.version>
 		<ca.umontreal.iro.simul_ssj.version>3.3.1</ca.umontreal.iro.simul_ssj.version>
 		<org.apache.chemistry.opencmis.version>0.12.0</org.apache.chemistry.opencmis.version>
+		<org.jheaps_jheaps.version>0.10</org.jheaps_jheaps.version>
 		
 		<license.apache20>							Apache License${line.separator}
 					   Version 2.0, January 2004${line.separator}
@@ -1011,6 +1012,23 @@ The Apache Software Foundation (http://www.apache.org/).
 											<source>true</source>
 										</artifact>
 									</artifacts>									
+								</feature>
+								<feature>
+									<id>org.jheaps.feature</id>
+									<version>${org.jheaps_jheaps.version}</version>
+									<label>JHeaps</label>
+									<providerName>${project.groupId}</providerName>
+									<description>${project.description}</description>
+									<copyright>A copyright</copyright>
+									<license>${license.apache20}</license>
+									<generateSourceFeature>true</generateSourceFeature>
+									<artifacts>
+										<artifact>
+											<id>org.jheaps:jheaps:${org.jheaps_jheaps.version}</id>
+											<transitive>false</transitive>
+											<source>true</source>
+										</artifact>
+									</artifacts>
 								</feature>
 								<feature>
 									<id>org.jscience.feature</id>
