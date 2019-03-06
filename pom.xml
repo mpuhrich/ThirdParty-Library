@@ -1020,7 +1020,6 @@ The Apache Software Foundation (http://www.apache.org/).
 									<label>JHeaps</label>
 									<providerName>${project.groupId}</providerName>
 									<description>${project.description}</description>
-									<copyright>A copyright</copyright>
 									<license>${license.apache20}</license>
 									<generateSourceFeature>true</generateSourceFeature>
 									<artifacts>
