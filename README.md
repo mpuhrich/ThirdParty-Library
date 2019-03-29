@@ -1,1 +1,1 @@
-# Palladio-ThirdParty-Library
+# ThirdParty-Library

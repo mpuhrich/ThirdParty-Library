@@ -2,21 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.palladiosimulator.thirdparty-library</groupId>
+	<groupId>tools.mdsd.thirdparty-library</groupId>
 	<artifactId>parent</artifactId>	
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<org.apache.commons_commons-math3.version>3.6.1</org.apache.commons_commons-math3.version>
-		<org.apache.commons_commons-csv.version>1.4</org.apache.commons_commons-csv.version>
-		<org.apache.commons_commons-collections4.version>4.3</org.apache.commons_commons-collections4.version>
-		<org.jgrapht_jgrapht-core.version>1.3.0</org.jgrapht_jgrapht-core.version>
-		<org.jscience_jscience.version>4.3.1</org.jscience_jscience.version>
-		<org.eclipse.ecf_ch.ethz.iks.r_osgi.remote.version>1.0.9</org.eclipse.ecf_ch.ethz.iks.r_osgi.remote.version>
-		<ca.umontreal.iro.simul_ssj.version>3.3.1</ca.umontreal.iro.simul_ssj.version>
-		<org.apache.chemistry.opencmis.version>0.12.0</org.apache.chemistry.opencmis.version>
-		<org.jheaps_jheaps.version>0.10</org.jheaps_jheaps.version>
+		<com.google.inject.guice.version>4.2.2</com.google.inject.guice.version>
+		<com.google.guava.version>25.1-jre</com.google.guava.version>
+		
 		
 		<license.apache20>							Apache License${line.separator}
 					   Version 2.0, January 2004${line.separator}
@@ -926,190 +920,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.${line.separator}
 							<categoryFileURL>${project.basedir}/category.xml</categoryFileURL>
 							<featureDefinitions>
 								<feature>
-									<id>org.apache.commons.math3.feature</id>
-									<version>${org.apache.commons_commons-math3.version}</version>
-									<label>Apache Commons Math</label>
-									<providerName>${project.groupId}</providerName>
-									<description>${project.description}</description>
-									<copyright>
-Apache Commons Math
-Copyright 2001-2016 The Apache Software Foundation
-
-This product includes software developed at
-The Apache Software Foundation (http://www.apache.org/).
-
-This product includes software developed for Orekit by
-CS Systèmes d'Information (http://www.c-s.fr/)
-Copyright 2010-2012 CS Systèmes d'Information
-									</copyright>
-									<license>${license.apache20}${license.additions.apache.commons.math3}</license>
-									<generateSourceFeature>true</generateSourceFeature>
-									<artifacts>
-										<artifact>
-											<id>org.apache.commons:commons-math3:${org.apache.commons_commons-math3.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-									</artifacts>									
-								</feature>
-								<feature>
-									<id>org.apache.commons.csv.feature</id>
-									<version>${org.apache.commons_commons-csv.version}</version>
-									<label>Commons CSV</label>
-									<providerName>${project.groupId}</providerName>
-									<description>${project.description}</description>
-									<copyright>
-Apache Commons CSV
-Copyright 2005-2016 The Apache Software Foundation
-
-This product includes software developed at
-The Apache Software Foundation (http://www.apache.org/).
-									</copyright>
-									<license>${license.apache20}</license>
-									<generateSourceFeature>true</generateSourceFeature>
-									<artifacts>
-										<artifact>
-											<id>org.apache.commons:commons-csv:${org.apache.commons_commons-csv.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-									</artifacts>									
-								</feature>
-								<feature>
-									<id>org.apache.commons.collections4.feature</id>
-									<version>${org.apache.commons_commons-collections4.version}</version>
-									<label>Apache Commons Collections</label>
-									<providerName>${project.groupId}</providerName>
-									<description>${project.description}</description>
-									<copyright>
-Apache Commons Collections
-Copyright 2001-2015 The Apache Software Foundation
-
-This product includes software developed at
-The Apache Software Foundation (http://www.apache.org/).
-									</copyright>
-									<license>${license.apache20}</license>
-									<generateSourceFeature>true</generateSourceFeature>
-									<artifacts>
-										<artifact>
-											<id>org.apache.commons:commons-collections4:${org.apache.commons_commons-collections4.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-									</artifacts>									
-								</feature>
-								<feature>
-									<id>org.jgrapht.feature</id>
-									<version>${org.jgrapht_jgrapht-core.version}</version>
-									<label>JGraphT Core</label>
-									<providerName>${project.groupId}</providerName>
-									<description>${project.description}</description>
-									<license>${license.lgpl21}${license.epl20}</license>
-									<generateSourceFeature>true</generateSourceFeature>
-									<artifacts>
-										<artifact>
-											<id>org.jgrapht:jgrapht-core:${org.jgrapht_jgrapht-core.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-									</artifacts>									
-								</feature>
-								<feature>
-									<id>org.jheaps.feature</id>
-									<version>${org.jheaps_jheaps.version}</version>
-									<label>JHeaps</label>
+									<id>com.google.inject.guice.feature</id>
+									<version>${com.google.inject.guice.version}</version>
+									<label>Google Guice</label>
 									<providerName>${project.groupId}</providerName>
 									<description>${project.description}</description>
 									<license>${license.apache20}</license>
 									<generateSourceFeature>true</generateSourceFeature>
 									<artifacts>
 										<artifact>
-											<id>org.jheaps:jheaps:${org.jheaps_jheaps.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-									</artifacts>
-								</feature>
-								<feature>
-									<id>org.jscience.feature</id>
-									<version>${org.jscience_jscience.version}</version>
-									<label>JScience</label>
-									<providerName>${project.groupId}</providerName>
-									<description>${project.description}</description>
-									<license>${license.apache20}</license>
-									<generateSourceFeature>true</generateSourceFeature>
-									<artifacts>
-										<artifact>
-											<id>org.jscience:jscience:${org.jscience_jscience.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-									</artifacts>									
-								</feature>
-								<feature>
-									<id>org.eclipse.ecf.ch.ethz.feature</id>
-									<version>${org.eclipse.ecf_ch.ethz.iks.r_osgi.remote.version}</version>
-									<label>ETHZ IKS R OSGi Remote</label>
-									<providerName>${project.groupId}</providerName>
-									<description>${project.description}</description>
-									<license>${license.epl10}</license>
-									<generateSourceFeature>true</generateSourceFeature>
-									<artifacts>
-										<artifact>
-											<id>org.eclipse.ecf:ch.ethz.iks.r_osgi.remote:${org.eclipse.ecf_ch.ethz.iks.r_osgi.remote.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-									</artifacts>									
-								</feature>
-								<feature>
-									<id>ca.umontreal.iro.ssj.feature</id>
-									<version>${ca.umontreal.iro.simul_ssj.version}</version>
-									<label>SSJ</label>
-									<providerName>${project.groupId}</providerName>
-									<description>${project.description}</description>
-									<copyright>Copyright (C) 2008-2018  Pierre L'Ecuyer and Université de Montréal</copyright>
-									<license>${license.apache20}</license>
-									<generateSourceFeature>true</generateSourceFeature>
-									<artifacts>
-										<artifact>
-											<id>ca.umontreal.iro.simul:ssj:${ca.umontreal.iro.simul_ssj.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-									</artifacts>									
-								</feature>
-								<feature>
-									<id>org.apache.chemistry.opencmis.feature</id>
-									<version>${org.apache.chemistry.opencmis.version}</version>
-									<label>OpenCMIS</label>
-									<providerName>${project.groupId}</providerName>
-									<description>${project.description}</description>
-									<license>${license.apache20}</license>
-									<generateSourceFeature>true</generateSourceFeature>
-									<artifacts>
-										<artifact>
-											<id>org.apache.chemistry.opencmis:chemistry-opencmis-client-impl:${org.apache.chemistry.opencmis.version}</id>
+											<id>com.google.inject:guice:${com.google.inject.guice.version}</id>
 											<transitive>false</transitive>
 											<source>true</source>
 										</artifact>
 										<artifact>
-											<id>org.apache.chemistry.opencmis:chemistry-opencmis-client-api:${org.apache.chemistry.opencmis.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-										<artifact>
-											<id>org.apache.chemistry.opencmis:chemistry-opencmis-client-bindings:${org.apache.chemistry.opencmis.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-										<artifact>
-											<id>org.apache.chemistry.opencmis:chemistry-opencmis-commons-impl:${org.apache.chemistry.opencmis.version}</id>
-											<transitive>false</transitive>
-											<source>true</source>
-										</artifact>
-										<artifact>
-											<id>org.apache.chemistry.opencmis:chemistry-opencmis-commons-api:${org.apache.chemistry.opencmis.version}</id>
+											<id>com.google.guava:guava:${com.google.guava.version}</id>
 											<transitive>false</transitive>
 											<source>true</source>
 										</artifact>
