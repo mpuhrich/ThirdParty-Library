@@ -1,0 +1,123 @@
+plugins {
+	id 'org.standardout.bnd-platform'
+}
+
+repositories {
+	mavenCentral()
+}
+
+defaultTasks 'clean', 'updateSite'
+
+platform {
+	categoryId = platformCategoryId
+	categoryName = platformCategoryName
+
+	useBndHashQualifiers = false
+	useFeatureHashQualifiers = false
+	generatePlatformFeature = false
+	eclipseMirror = eclipseDownloadUrl
+
+	feature(id: 'org.javatuples.feature',
+			name: 'Javatuples Feature',
+			version: javatuplesVersion,
+			provider: providerName,
+			license: "https://raw.githubusercontent.com/javatuples/javatuples/javatuples-$javatuplesVersion/LICENSE.txt".toURL().getText()) {
+		bundle "org.javatuples:javatuples:$javatuplesVersion"
+	}
+	
+	feature(id: 'org.apache.aries.spifly.dynamic.feature',
+			name: 'Apache Aries SPI Fly Dynamic Bundle',
+			version: spiflyVersion,
+			provider: providerName,
+			license: "https://raw.githubusercontent.com/apache/aries/spifly-$spiflyVersion/LICENSE".toURL().getText()) {
+		bundle 'org.apache.aries:org.apache.aries.util:1.1.1'
+		bundle "org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:$spiflyVersion"
+	}
+
+	feature(id: 'com.google.inject.guice.feature',
+			name: 'Google Guice Feature',
+			version: guiceVersion,
+			provider: providerName,
+			license: "https://raw.githubusercontent.com/google/guice/$guiceVersion/COPYING".toURL().getText()) {
+		bundle "com.google.inject:guice:$guiceVersion:no_aop" , {
+			exclude group: 'aopalliance', module: 'aopalliance'
+			exclude group: 'javax.inject', module: 'javax.inject'
+			exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
+			exclude group: 'com.google.j2objc', module: 'j2objc-annotations'
+			exclude group: 'com.google.code.findbugs', module: 'jsr305'
+			exclude group: 'org.checkerframework', module: 'checker-qual'
+			exclude group: 'org.codehaus.mojo', module: 'animal-sniffer-annotations'
+		}
+	}
+
+	feature(id: 'net.bytebuddy.byte-buddy.feature',
+			name: 'Byte-Buddy',
+			version: byteBuddyVersion,
+			provider: providerName,
+			license: "https://raw.githubusercontent.com/raphw/byte-buddy/byte-buddy-$byteBuddyVersion/LICENSE".toURL().getText()) {
+		plugin "net.bytebuddy:byte-buddy:$byteBuddyVersion"
+		plugin "net.bytebuddy:byte-buddy-agent:$byteBuddyVersion"
+	}
+
+	feature(id: 'org.mockito.core-with-junit-extension.feature',
+			name: 'Mockito with JUnit5 Extension',
+			version: mockitoVersion,
+			provider: providerName,
+			license: "https://raw.githubusercontent.com/mockito/mockito/v$mockitoVersion/LICENSE".toURL().getText()) {
+		bundle "org.mockito:mockito-core:$mockitoVersion", {
+			exclude group: 'org.objenesis', module: 'objenesis'
+			exclude group: 'net.bytebuddy', module: 'byte-buddy'
+			exclude group: 'net.bytebuddy', module: 'byte-buddy-agent'
+		}
+
+		bundle "org.mockito:mockito-junit-jupiter:$mockitoVersion", {
+			exclude group: 'org.junit.jupiter', module: 'junit-jupiter-api'
+			exclude group: 'org.mockito', module: 'mockito-core'
+		}
+
+		// We merge all the mockito extension to one JAR, as the Mockito OSGI Manifest does not export some of
+		// the packages needed by the extension(s).
+		merge (failOnDuplicate: false, collectServices: true) {
+			match {
+				it.group == 'org.mockito'
+			}
+
+			bnd {
+				symbolicName = 'org.mockito.mockito-merged'
+				bundleName = 'Mockito'
+				version = mockitoVersion
+
+				// Adapted from:
+				// https://github.com/mockito/mockito/blob/release/3.x/gradle/mockito-core/osgi.gradle
+
+				optionalImport '*'
+				prependImport 'net.bytebuddy.*;version="[1.6.0,2.0)"'
+				prependImport 'org.objenesis;version="[2.5,3.0)"'
+
+				instruction 'Export-Package',"!org.mockito.internal.*,org.mockito.*;version=$mockitoVersion"
+			}
+		}
+	}
+
+	feature(id: 'org.hamcrest.feature',
+			name: 'Hamcrest Matchers',
+			version: hamcrestVersion,
+			provider: providerName,
+			license: "https://raw.githubusercontent.com/hamcrest/JavaHamcrest/v$hamcrestVersion/LICENSE.txt".toURL().getText()) {
+		bundle "org.hamcrest:hamcrest:$hamcrestVersion"
+	}
+}
+
+task copySpiFlyBundleToPatch(type: Copy) {
+	from file("build/plugins/org.apache.aries.spifly.dynamic.bundle_${spiflyVersion}.jar")
+	into file("build/tmp/plugins/")
+}
+
+task patchSpiFlyP2Inf(type: Zip, dependsOn: copySpiFlyBundleToPatch) {
+	archiveFileName = "org.apache.aries.spifly.dynamic.bundle_${spiflyVersion}.jar"
+	destinationDirectory = file("build/plugins")
+	from zipTree("build/tmp/plugins/org.apache.aries.spifly.dynamic.bundle_${spiflyVersion}.jar")
+	from "org.apache.aries.spifly.dynamic.bundle.p2inf.patch"
+}
+
+bundleFeatures.dependsOn(patchSpiFlyP2Inf)
