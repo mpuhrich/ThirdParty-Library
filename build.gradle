@@ -30,7 +30,7 @@ platform {
 			version: spiflyVersion,
 			provider: providerName,
 			license: "https://raw.githubusercontent.com/apache/aries/spifly-$spiflyVersion/LICENSE".toURL().getText()) {
-		bundle 'org.apache.aries:org.apache.aries.util:1.1.1'
+		bundle 'org.apache.aries:org.apache.aries.util:1.1.3'
 		bundle "org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:$spiflyVersion"
 	}
 
