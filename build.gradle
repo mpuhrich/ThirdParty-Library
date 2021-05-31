@@ -34,6 +34,17 @@ platform {
 		bundle "org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:$spiflyVersion"
 	}
 
+	feature(id: 'org.apache.parquet',
+			name: 'Apache Parquet',
+			version: parquetVersion,
+			provider: providerName,
+			license: "https://raw.githubusercontent.com/apache/parquet-mr/apache-parquet-$parquetVersion/LICENSE".toURL().getText()) {
+		bundle "org.apache.parquet:parquet-common:$parquetVersion"
+		bundle "org.apache.parquet:parquet-encoding:$parquetVersion"
+		bundle "org.apache.parquet:parquet-column:$parquetVersion"
+		bundle "org.apache.parquet:parquet-hadoop:$parquetVersion"
+	}
+
 	feature(id: 'com.google.inject.guice.feature',
 			name: 'Google Guice Feature',
 			version: guiceVersion,
